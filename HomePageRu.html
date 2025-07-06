@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asbest Repair</title>
+  <style>
+    /* Твой оригинальный CSS без изменений */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      /* Отключаем скролл при масштабировании */
+      overflow-x: hidden;
+    }
+
+    /* Добавляем обертку для масштаба */
+    #zoom-wrapper {
+      transform: scale(0.75);
+      transform-origin: 0 0;
+      width: 133.3333vw; /* 100 / 0.75 = 133.33% ширины */
+      height: 133.3333vh; /* тоже по высоте */
+    }
+
+    /* Вот тут идёт весь твой CSS без изменений: */
+    header {
+      background: #ffffff;
+      color: #333;
+      padding: 10px 20px;
+      text-align: left;
+      font-size: 1.5rem;
+      font-weight: bold;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .site-title {
+      white-space: nowrap;
+    }
+
+    header .language-select {
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-left: auto;
+      width: auto;
+      white-space: nowrap;
+      position: relative;
+      right: 15px; /* сдвинет кнопку левее */
+      margin-left: -10px; /* подвинет кнопку левее */
+    }
+
+    header .language-select:hover {
+      background-color: #5c6bc0;
+    }
+
+    nav {
+      background: #444343;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      position: fixed;
+      top: 60px;
+      width: 100%;
+      z-index: 999;
+    }
+
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff9800;
+    }
+
+    main {
+      margin-top: 100px;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      width: 100% !important;
+      max-width: 300px !important;
+      overflow: hidden;
+      margin: 30px 0;
+    }
+
+
+
+    .form-header {
+      background: #3f51b5;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .form-body {
+      padding: 25px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #3f51b5;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3f51b5;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #5c6bc0;
+    }
+
+    .big-input {
+      height: 80px;
+      line-height: 1.4;
+    }
+
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 550px;
+      background-image: url('AsbestWelcome.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  position: relative;
+  z-index: 2;
+  flex-wrap: nowrap; /* <<< ВАЖНО */
+}
+
+.hero-left,
+.hero-right {
+  width: 50%; /* фикс ширина */
+  min-width: 0; /* не даём вылазить за пределы */
+}
+
+.hero-left {
+  padding-left: 60px;
+}
+
+.hero-right {
+  flex: 1;
+  padding-right: 60px;       /* Отступ от правого края окна */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;     /* Правый блок прижат к правому краю */
+  text-align: right;         /* Заголовок справа */
+  position: relative;
+}
+
+.hero-right h1 {
+  font-size: 35px;
+  padding-right: 35px; 
+  margin-bottom: 10px;
+  margin-right: 0;           /* Заголовок у правого края */
+}
+
+.hero-right .text-list {    /* Обёртка для текста под заголовком */
+  width: 100%;
+  max-width: 400px;
+  text-align: left;         /* Текст прижат слева внутри блока */
+  margin-top: 0;
+  margin-left: 0;
+  /* чтобы начать ровно под заголовком, сдвигаем этот блок влево на ширину заголовка минус padding */
+  position: relative;
+  left: 150px;              /* Подкорректируй цифру под свой отступ */
+}
+.hero-right p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+}
+
+
+
+    .welcome-banner {
+      background-image: url('black.png');
+      background-size: cover;
+      background-position: center;
+      height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      color: white;
+    }
+
+    .contact-text {
+      max-width: 600px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-text h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .contact-text p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-image: url('black.png');
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
+
+    .form-container {
+      max-width: 400px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .hero-left {
+  flex: 1;
+  font-size: 16px;
+  padding-left: 0px;
+  
+}
+
+.hero-left h1 {
+  font-size: 35px;
+  padding-right: 35px; 
+  margin-bottom: 10px;
+  margin-right: 0;           /* Заголовок у правого края */
+}
+
+.hero-left p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+}
+
+.hero-right {
+  flex: 1;
+  padding-right: 0px;
+}
+
+    .content-section {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      align-items: center;
+      margin-top: 20px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+    }
+
+    .text-left {
+      flex: 1;
+      padding-right: 20px;
+      margin-bottom: 10px;
+      min-width: 1407px;
+    }
+
+.image-right {
+  width: 400px;              /* Фикс ширины, без flex */
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 60px;       /* Отступ от правого края — как у текста */
+  position: absolute;        /* <<< фиксируем позицию, чтоб не плыла */
+  right: 0;                  /* прижимаем к правому краю */
+}
+
+.image-right img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+
+
+    * {
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .divider {
+      width: 2px;
+      background-color: #ccc;
+      height: 80%;
+      margin: 0 20px;
+    }
+
+  </style>
+</head>
+<link rel="icon" type="image/png" href="ico.png" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap&subset=cyrillic" rel="stylesheet" />
+
+<body>
+
+  <div id="zoom-wrapper">
+    <header>
+      <div class="site-title">Asbest Repair 🔧</div>
+      <button class="language-select" onclick="window.location.href='index.html'">EST</button>
+    </header>
+
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-left">
+          <h1>Asbest Repair Team</h1>
+        <p>▫️Ремонт компактной электроники</p>
+        <p>▫️Ремонт бытовой техники</p>
+        <p>▫️Ремонт домашней электроники</p>
+        </div>
+        <div class="hero-right">
+  <h1>Почему мы?</h1>
+  <div class="text-list">
+        <p>▫️Работаем по выходным</p>
+        <p>▫️Быстрый ремонт</p>
+        <p>▫️Низкая стоимость</p>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="text-left">
+        <h1>Ремонт Персональных Компьютеров</h1>
+      <h3>▫️Ремонт материнской платы</h3>
+      <h3>▫️Чистка от пыли</h3>
+      <h3>▫️Замена термопасты</h3>
+      <h3>▫️Переустановка Windows</h3>
+      <h3>▫️Замена корпуса</h3>
+      <h3>▫️Апгрейд</h3>
+      <h3>▫️Другие работы</h3>
+      </div>
+      <div class="image-right">
+        <img src="https://cdn.digital-razor.ru/2OVeiIe1l3JfiZjboLmJS8aruBA=/fit-in/464x464/files/upload/iblock/c0c/c0ce11aeb5fdf0fe340203f8544bed34.png" alt="Pilt paremal" />
+      </div>
+    </div>
+
+
+    <div class="content-section">
+      <div class="text-left">
+        <h1>Ремонт Ноутбуков</h1>
+      <h3>▫️Замена петель</h3>
+      <h3>▫️Замена клавиатуры</h3>
+      <h3>▫️Ремонт материнской платы</h3>
+      <h3>▫️Чистка от пыли</h3>
+      <h3>▫️Замена термопасты</h3>
+      <h3>▫️Переустановка Windows</h3>
+      <h3>▫️Апгрейд</h3>
+      <h3>▫️Другие работы</h3>
+      </div>
+      <div class="image-right">
+        <img src="https://images.prom.ua/1584347388_w600_h600_1584347388.jpg" alt="Pilt paremal" />
+      </div>
+    </div>
+
+
+    <div class="content-section">
+      <div class="text-left">
+        <h1>Ремонт Телефонов и Планшетов</h1>
+      <h3>▫️Замена дисплея</h3>
+      <h3>▫️Замена кнопок</h3>
+      <h3>▫️Замена разъема питания</h3>
+      <h3>▫️Замена корпуса</h3>
+      <h3>▫️Другие работы</h3>
+      </div>
+      <div class="image-right">
+        <img src="https://remhol.ee/wp-content/themes/cynic/images/repair-phone-samsung.png" alt="Pilt paremal" />
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="text-left">
+        <h1>Средства Индивидуальной Мобильности</h1>
+      <h3>▫️Ремонт</h3>
+      <h3>▫️Обслуживание</h3>
+      <h3>▫️Замена комплектующих</h3>
+      <h3>▫️Замена Резины</h3>
+      </div>
+      <div class="image-right">
+        <img src="https://bikevelo.ru/image/trumb/1024x1024/41895.jpg" alt="Изображение справа" />
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="text-left">
+        <h1>Бытовая Электроника</h1>
+      <h3>▫️Ремонт</h3>
+      <h3>▫️Обслуживание</h3>
+      </div>
+      <div class="image-right">
+        <img src="https://new.ksd-images.lt/display?path=aikido/cache/86b0e97344210691e2445e69b946c484.jpeg&h=270&op=fit&w=374" alt="Изображение справа" />
+      </div>
+    </div>
+
+    <div class="welcome-banner">
+      <div class="contact-text">
+        <h1>Обратная Связь</h1>
+      <p>Телефон: +372 56046879</p>
+      <p>Телефон: +372 55637090</p>
+      <p>asbest.repair@gmail.com</p>
+      <p>Raadiku 8-3/29</p>
+      </div>
+
+      <div class="form-container">
+        <div class="form-header">Оставьте заявку на ремонт
+          <h6>Ответ с примерной стоимостью и временем ремонта придет вам на почту!</h6>
+        </div>
+        <form action="https://formspree.io/f/xvgrndnl" method="POST" class="form-body">
+          <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="email" name="_replyto" placeholder="Email" required>
+        <input type="text" name="device" placeholder="Устройство (Пример: iPhone)" required>
+        <input type="text" name="issue" placeholder="Что сломалось?" class="big-input" required>
+        <button type="submit">Оставить заявку</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
