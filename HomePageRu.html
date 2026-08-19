@@ -1,501 +1,668 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asbest Repair</title>
-  <style>
-    /* Твой оригинальный CSS без изменений */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    body {
-      background: #ffffff;
-      color: #333;
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      /* Отключаем скролл при масштабировании */
-      overflow-x: hidden;
-    }
-
-    /* Добавляем обертку для масштаба */
-    #zoom-wrapper {
-      transform: scale(0.75);
-      transform-origin: 0 0;
-      width: 133.3333vw; /* 100 / 0.75 = 133.33% ширины */
-      height: 133.3333vh; /* тоже по высоте */
-    }
-
-    /* Вот тут идёт весь твой CSS без изменений: */
-    header {
-      background: #ffffff;
-      color: #333;
-      padding: 10px 20px;
-      text-align: left;
-      font-size: 1.5rem;
-      font-weight: bold;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header .site-title {
-      white-space: nowrap;
-    }
-
-    header .language-select {
-      background-color: #3f51b5;
-      color: white;
-      border: none;
-      padding: 4px 8px;
-      font-size: 0.8rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-left: auto;
-      width: auto;
-      white-space: nowrap;
-      position: relative;
-      right: 15px; /* сдвинет кнопку левее */
-      margin-left: -10px; /* подвинет кнопку левее */
-    }
-
-    header .language-select:hover {
-      background-color: #5c6bc0;
-    }
-
-    nav {
-      background: #444343;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 10px;
-      position: fixed;
-      top: 60px;
-      width: 100%;
-      z-index: 999;
-    }
-
-    nav a {
-      color: #f5f5f5;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #ff9800;
-    }
-
-    main {
-      margin-top: 100px;
-      padding: 20px;
-    }
-
-    .form-container {
-      background: #fff;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      border-radius: 8px;
-      width: 100% !important;
-      max-width: 300px !important;
-      overflow: hidden;
-      margin: 30px 0;
-    }
-
-
-
-    .form-header {
-      background: #3f51b5;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .form-body {
-      padding: 25px;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      transition: border 0.3s;
-    }
-
-    input:focus {
-      border-color: #3f51b5;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #3f51b5;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #5c6bc0;
-    }
-
-    .big-input {
-      height: 80px;
-      line-height: 1.4;
-    }
-
-    .hero-banner {
-      position: relative;
-      width: 100%;
-      height: 550px;
-      background-image: url('AsbestWelcome.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-banner::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
-    }
-
-    .hero-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 60px;
-  width: 100%;
-  height: 100%;
-  color: white;
-  position: relative;
-  z-index: 2;
-  flex-wrap: nowrap; /* <<< ВАЖНО */
-}
-
-.hero-left,
-.hero-right {
-  width: 50%; /* фикс ширина */
-  min-width: 0; /* не даём вылазить за пределы */
-}
-
-.hero-left {
-  padding-left: 60px;
-}
-
-.hero-right {
-  flex: 1;
-  padding-right: 60px;       /* Отступ от правого края окна */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;     /* Правый блок прижат к правому краю */
-  text-align: right;         /* Заголовок справа */
-  position: relative;
-}
-
-.hero-right h1 {
-  font-size: 35px;
-  padding-right: 35px; 
-  margin-bottom: 10px;
-  margin-right: 0;           /* Заголовок у правого края */
-}
-
-.hero-right .text-list {    /* Обёртка для текста под заголовком */
-  width: 100%;
-  max-width: 400px;
-  text-align: left;         /* Текст прижат слева внутри блока */
-  margin-top: 0;
-  margin-left: 0;
-  /* чтобы начать ровно под заголовком, сдвигаем этот блок влево на ширину заголовка минус padding */
-  position: relative;
-  left: 150px;              /* Подкорректируй цифру под свой отступ */
-}
-.hero-right p {
-  font-size: 16px;
-  line-height: 1.4;
-  margin: 0 0 10px 0;
-}
-
-
-
-    .welcome-banner {
-      background-image: url('black.png');
-      background-size: cover;
-      background-position: center;
-      height: 550px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-      color: white;
-    }
-
-    .contact-text {
-      max-width: 600px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    }
-
-    .contact-text h1 {
-      font-size: 36px;
-      margin-bottom: 15px;
-    }
-
-    .contact-text p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    footer {
-      background-image: url('black.png');
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #ffffff;
-    }
-
-    .form-container {
-      max-width: 400px;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .hero-left {
-  flex: 1;
-  font-size: 16px;
-  padding-left: 0px;
-  
-}
-
-.hero-left h1 {
-  font-size: 35px;
-  padding-right: 35px; 
-  margin-bottom: 10px;
-  margin-right: 0;           /* Заголовок у правого края */
-}
-
-.hero-left p {
-  font-size: 16px;
-  line-height: 1.4;
-  margin: 0 0 10px 0;
-}
-
-.hero-right {
-  flex: 1;
-  padding-right: 0px;
-}
-
-    .content-section {
-      background-color: white;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-      align-items: center;
-      margin-top: 20px;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-    }
-
-    .text-left {
-      flex: 1;
-      padding-right: 20px;
-      margin-bottom: 10px;
-      min-width: 1407px;
-    }
-
-.image-right {
-  width: 400px;              /* Фикс ширины, без flex */
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 60px;       /* Отступ от правого края — как у текста */
-  position: absolute;        /* <<< фиксируем позицию, чтоб не плыла */
-  right: 0;                  /* прижимаем к правому краю */
-}
-
-.image-right img {
-  width: 80%;
-  max-width: 300px;
-  height: auto;
-  max-height: 300px;
-  object-fit: contain;
-}
-
-
-
-    * {
-      font-family: 'Manrope', sans-serif;
-    }
-
-    .divider {
-      width: 2px;
-      background-color: #ccc;
-      height: 80%;
-      margin: 0 20px;
-    }
-
-  </style>
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Asbest Repair</title>
+<meta name="description" content="Asbest Repair — быстрый и надёжный ремонт компьютеров, ноутбуков, телефонов и бытовой электроники в Таллинне. Работаем и по выходным." />
 <link rel="icon" type="image/png" href="ico.png" />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap&subset=cyrillic" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@300;400;500;600;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#12151a;
+  --bg-soft:#161a20;
+  --surface:#1a1f26;
+  --surface-2:#20262f;
+  --line:rgba(255,255,255,0.09);
+  --line-strong:rgba(255,255,255,0.16);
+  --text:#edeff3;
+  --text-muted:#8d96a3;
+  --accent:#ffb020;
+  --accent-soft:rgba(255,176,32,0.14);
+  --accent-2:#4fd1c5;
+  --accent-2-soft:rgba(79,209,197,0.14);
+  --on-accent:#14110a;
+  --radius:20px;
+  --radius-sm:12px;
+  --container:1180px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
 
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Manrope',sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.font-display{font-family:'Unbounded',sans-serif;letter-spacing:-0.01em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;}
+ul{list-style:none;}
+button,input{font-family:inherit;}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 20px;}
+@media(min-width:640px){.container{padding:0 32px;}}
+
+/* ---------- reveal-on-scroll ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+.reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.reveal-stagger.is-visible > *{opacity:1;transform:translateY(0);}
+.reveal-stagger.is-visible > *:nth-child(1){transition-delay:.05s;}
+.reveal-stagger.is-visible > *:nth-child(2){transition-delay:.14s;}
+.reveal-stagger.is-visible > *:nth-child(3){transition-delay:.23s;}
+.reveal-stagger.is-visible > *:nth-child(4){transition-delay:.32s;}
+.reveal-stagger.is-visible > *:nth-child(5){transition-delay:.41s;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:16px 0;
+  transition:padding .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease);
+  border-bottom:1px solid transparent;
+}
+header.is-scrolled{
+  padding:10px 0;
+  background:rgba(18,21,26,0.82);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:600;font-size:1rem;white-space:nowrap;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 0 rgba(79,209,197,.55);animation:pulse 2.2s infinite;flex-shrink:0;}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(79,209,197,.55);}
+  70%{box-shadow:0 0 0 9px rgba(79,209,197,0);}
+  100%{box-shadow:0 0 0 0 rgba(79,209,197,0);}
+}
+.brand-wrench{font-size:1.1rem;}
+nav.main-nav{display:none;align-items:center;gap:28px;font-size:.92rem;color:var(--text-muted);}
+nav.main-nav a{transition:color .25s;position:relative;}
+nav.main-nav a:hover{color:var(--text);}
+.header-actions{display:flex;align-items:center;gap:10px;}
+.lang-btn{
+  background:var(--surface-2);
+  color:var(--text);
+  border:1px solid var(--line-strong);
+  padding:8px 14px;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .25s,border-color .25s,transform .2s;
+  font-family:'JetBrains Mono',monospace;
+}
+.lang-btn:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+.menu-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:10px;
+  background:var(--surface-2);border:1px solid var(--line-strong);
+  cursor:pointer;
+}
+.menu-toggle span,.menu-toggle::before,.menu-toggle::after{content:"";display:block;width:16px;height:2px;background:var(--text);border-radius:2px;}
+.menu-toggle{flex-direction:column;gap:4px;}
+@media(min-width:900px){.menu-toggle{display:none;}nav.main-nav{display:flex;}}
+
+.mobile-panel{
+  position:fixed;top:0;left:0;width:100%;height:100vh;
+  background:var(--bg-soft);
+  z-index:1100;
+  display:flex;flex-direction:column;
+  padding:20px;
+  transform:translateY(-100%);
+  transition:transform .4s var(--ease);
+}
+.mobile-panel.is-open{transform:translateY(0);}
+.mobile-panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+.mobile-panel-close{width:38px;height:38px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line-strong);position:relative;cursor:pointer;}
+.mobile-panel-close::before,.mobile-panel-close::after{content:"";position:absolute;top:50%;left:50%;width:16px;height:2px;background:var(--text);}
+.mobile-panel-close::before{transform:translate(-50%,-50%) rotate(45deg);}
+.mobile-panel-close::after{transform:translate(-50%,-50%) rotate(-45deg);}
+.mobile-panel a{display:block;font-family:'Unbounded',sans-serif;font-size:1.6rem;padding:14px 0;border-bottom:1px solid var(--line);}
+.mobile-panel .mobile-meta{margin-top:auto;color:var(--text-muted);font-size:.85rem;font-family:'JetBrains Mono',monospace;line-height:1.9;}
+.mobile-panel .mobile-meta a{display:inline;font-family:inherit;font-size:inherit;padding:0;border:0;color:var(--accent-2);}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  padding:150px 0 90px;
+  overflow:hidden;
+  background:
+    radial-gradient(700px 420px at 85% -10%, rgba(255,176,32,0.16), transparent 60%),
+    radial-gradient(600px 500px at -10% 30%, rgba(79,209,197,0.10), transparent 60%),
+    var(--bg);
+}
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(600px 500px at 70% 10%, black, transparent 75%);
+  -webkit-mask-image:radial-gradient(600px 500px at 70% 10%, black, transparent 75%);
+  opacity:.5;
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-2);
+  background:var(--accent-2-soft);
+  border:1px solid rgba(79,209,197,.3);
+  padding:7px 14px;border-radius:999px;
+  margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2.1rem,7vw,3.6rem);
+  font-weight:800;
+  line-height:1.08;
+  max-width:15ch;
+  margin-bottom:20px;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--accent),#ffd580);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{
+  font-size:clamp(1rem,2.4vw,1.15rem);
+  color:var(--text-muted);
+  max-width:46ch;
+  margin-bottom:34px;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:46px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 26px;border-radius:999px;
+  font-weight:700;font-size:.95rem;
+  cursor:pointer;border:1px solid transparent;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s;
+  text-decoration:none;
+}
+.btn-primary{background:var(--accent);color:var(--on-accent);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(255,176,32,.55);}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line-strong);}
+.btn-ghost:hover{border-color:var(--accent-2);color:var(--accent-2);transform:translateY(-2px);}
+
+.badge-row{display:flex;flex-wrap:wrap;gap:12px;}
+.badge-chip{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--line);
+  padding:10px 16px;border-radius:14px;
+  font-size:.85rem;color:var(--text);
+}
+.badge-chip svg{width:18px;height:18px;color:var(--accent);flex-shrink:0;}
+
+/* ---------- section shells ---------- */
+section{position:relative;padding:78px 0;}
+.section-head{max-width:640px;margin-bottom:44px;}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);display:block;margin-bottom:12px;
+}
+.section-head h2{font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:700;line-height:1.15;}
+.section-head p{color:var(--text-muted);margin-top:14px;font-size:1rem;max-width:52ch;}
+
+/* ---------- services / ticket cards ---------- */
+.services-grid{
+  display:grid;grid-template-columns:1fr;gap:22px;
+}
+@media(min-width:640px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr);}}
+
+.ticket{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 24px 24px;
+  transition:transform .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease);
+}
+.ticket:hover{transform:translateY(-6px);border-color:rgba(255,176,32,.4);box-shadow:0 24px 48px -24px rgba(0,0,0,.6);}
+.ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:22px;}
+.ticket-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--accent-soft);
+  border:1px solid rgba(255,176,32,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);flex-shrink:0;
+}
+.ticket-icon svg{width:26px;height:26px;}
+.ticket-code{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);letter-spacing:.05em;padding-top:4px;}
+.ticket h3{font-size:1.15rem;font-weight:700;margin-bottom:2px;font-family:'Unbounded',sans-serif;}
+.ticket-divider{position:relative;border-top:2px dashed var(--line-strong);margin:0 -24px 16px;}
+.ticket-divider::before,.ticket-divider::after{
+  content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg);
+}
+.ticket-divider::before{left:-9px;}
+.ticket-divider::after{right:-9px;}
+.ticket-list li{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:.92rem;color:var(--text-muted);
+  padding:5px 0;
+}
+.ticket-list li::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--accent-2);
+  margin-top:9px;flex-shrink:0;
+}
+
+/* ---------- why strip ---------- */
+.why-strip{
+  background:var(--bg-soft);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.why-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+@media(min-width:720px){.why-grid{grid-template-columns:repeat(3,1fr);}}
+.why-item{background:var(--bg-soft);padding:30px 26px;}
+.why-item .num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;margin-bottom:10px;display:block;}
+.why-item h3{font-size:1.15rem;margin-bottom:8px;}
+.why-item p{color:var(--text-muted);font-size:.92rem;}
+
+/* ---------- contact ---------- */
+.contact-section{background:linear-gradient(180deg,var(--bg) 0%, var(--bg-soft) 100%);}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:44px;}
+@media(min-width:960px){.contact-grid{grid-template-columns:1fr 1.1fr;gap:60px;align-items:start;}}
+
+.contact-info h2{font-size:clamp(1.6rem,4.5vw,2.1rem);margin-bottom:16px;}
+.contact-info p.lead{color:var(--text-muted);margin-bottom:32px;max-width:44ch;}
+.info-list{display:flex;flex-direction:column;gap:18px;}
+.info-list li{display:flex;align-items:center;gap:14px;}
+.info-icon{
+  width:42px;height:42px;border-radius:12px;background:var(--surface);
+  border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+  color:var(--accent-2);flex-shrink:0;
+}
+.info-icon svg{width:20px;height:20px;}
+.info-list a, .info-list span.info-text{font-size:.98rem;}
+.info-list a{text-decoration:none;transition:color .2s;}
+.info-list a:hover{color:var(--accent-2);}
+
+.form-ticket{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px 28px 28px;
+}
+.form-ticket::before{
+  content:"";
+  position:absolute;left:0;top:24px;bottom:24px;width:2px;
+  background-image:repeating-linear-gradient(180deg,var(--line-strong) 0 8px, transparent 8px 16px);
+}
+.form-ticket-head{margin-bottom:22px;}
+.form-ticket-head .mono{color:var(--accent);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.form-ticket-head h3{font-size:1.35rem;margin-bottom:8px;}
+.form-ticket-head p{color:var(--text-muted);font-size:.88rem;}
+
+.field{margin-bottom:16px;}
+.field label{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:6px;
+}
+.field input,.field textarea{
+  width:100%;background:var(--bg-soft);
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  padding:13px 14px;
+  color:var(--text);font-size:.95rem;
+  transition:border-color .25s,box-shadow .25s,background .25s;
+}
+.field input:focus,.field textarea:focus{
+  outline:none;border-color:var(--accent-2);
+  box-shadow:0 0 0 3px rgba(79,209,197,.18);
+  background:var(--surface-2);
+}
+.field textarea{resize:vertical;min-height:88px;font-family:inherit;}
+.submit-btn{
+  width:100%;padding:15px;border:none;border-radius:12px;
+  background:var(--accent);color:var(--on-accent);
+  font-weight:700;font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
+  margin-top:6px;
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(255,176,32,.5);}
+.submit-btn:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none;}
+.spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(20,17,10,.35);border-top-color:var(--on-accent);animation:spin .7s linear infinite;display:none;}
+.is-loading .spinner{display:inline-block;}
+.is-loading .submit-label{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.form-note{
+  display:flex;align-items:center;gap:10px;
+  margin-top:14px;padding:12px 14px;border-radius:10px;
+  font-size:.85rem;
+  opacity:0;max-height:0;overflow:hidden;
+  transition:opacity .3s, max-height .3s, padding .3s, margin .3s;
+}
+.form-note.is-visible{opacity:1;max-height:80px;margin-top:14px;}
+.form-note.success{background:var(--accent-2-soft);color:var(--accent-2);border:1px solid rgba(79,209,197,.3);}
+.form-note.error{background:rgba(255,90,90,.12);color:#ff8a8a;border:1px solid rgba(255,90,90,.3);}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:34px 0;
+  background:var(--bg);
+}
+.footer-row{display:flex;flex-direction:column;gap:16px;align-items:flex-start;font-size:.85rem;color:var(--text-muted);}
+@media(min-width:720px){.footer-row{flex-direction:row;justify-content:space-between;align-items:center;}}
+.footer-row .brand{font-size:.95rem;}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{text-decoration:none;color:var(--text-muted);transition:color .2s;}
+.footer-links a:hover{color:var(--accent-2);}
+</style>
+</head>
 <body>
 
-  <div id="zoom-wrapper">
-    <header>
-      <div class="site-title">Asbest Repair 🔧</div>
-      <button class="language-select" onclick="window.location.href='index.html'">EST</button>
-    </header>
+<header id="site-header">
+  <div class="container header-row">
+    <div class="brand"><span class="brand-wrench">🔧</span>Asbest Repair<span class="dot" aria-hidden="true"></span></div>
+    <nav class="main-nav">
+      <a href="#services">Услуги</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-btn" onclick="window.location.href='index.html'">EST</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</header>
 
-    <div class="hero-banner">
-      <div class="hero-content">
-        <div class="hero-left">
-          <h1>Asbest Repair Team</h1>
-        <p>▫️Ремонт компактной электроники</p>
-        <p>▫️Ремонт бытовой техники</p>
-        <p>▫️Ремонт домашней электроники</p>
-        </div>
-        <div class="hero-right">
-  <h1>Почему мы?</h1>
-  <div class="text-list">
-        <p>▫️Работаем по выходным</p>
-        <p>▫️Быстрый ремонт</p>
-        <p>▫️Низкая стоимость</p>
+<div class="mobile-panel" id="mobilePanel">
+  <div class="mobile-panel-top">
+    <div class="brand">🔧 Asbest Repair</div>
+    <button class="mobile-panel-close" id="mobilePanelClose" aria-label="Закрыть"></button>
+  </div>
+  <a href="#services" class="mobile-link">Услуги</a>
+  <a href="#contact" class="mobile-link">Контакты</a>
+  <div class="mobile-meta">
+    <div>Telefon: <a href="tel:+37255637090">+372 5563 7090</a></div>
+    <div><a href="mailto:asbest.group.entertainment@gmail.com">asbest.group.entertainment@gmail.com</a></div>
+    <div>Raadiku 8/3, Tallinn</div>
   </div>
 </div>
 
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow"><span class="dot" style="width:6px;height:6px;"></span>Таллинн · работаем 7 дней в неделю</span>
+      <h1 class="reveal">Ремонт электроники, <em>которому можно доверять</em></h1>
+      <p class="lead reveal">Компьютеры, ноутбуки, телефоны, средства индивидуальной мобильности и бытовая электроника.</p>
+      <div class="hero-cta reveal">
+        <a href="#contact" class="btn btn-primary">Оставить заявку</a>
+        <a href="#services" class="btn btn-ghost">Смотреть услуги</a>
       </div>
-    </div>
-
-    <div class="content-section">
-      <div class="text-left">
-        <h1>Ремонт Персональных Компьютеров</h1>
-      <h3>▫️Ремонт материнской платы</h3>
-      <h3>▫️Чистка от пыли</h3>
-      <h3>▫️Замена термопасты</h3>
-      <h3>▫️Переустановка Windows</h3>
-      <h3>▫️Замена корпуса</h3>
-      <h3>▫️Апгрейд</h3>
-      <h3>▫️Другие работы</h3>
-      </div>
-      <div class="image-right">
-        <img src="https://st.aestatic.net/items-img/R/0/2/J/Ae0103f9ed80a436ba3cae91341f1a8f9C.jpg_960x960.jpg" alt="Pilt paremal" />
-      </div>
-    </div>
-
-
-    <div class="content-section">
-      <div class="text-left">
-        <h1>Ремонт Ноутбуков</h1>
-      <h3>▫️Замена петель</h3>
-      <h3>▫️Замена клавиатуры</h3>
-      <h3>▫️Ремонт материнской платы</h3>
-      <h3>▫️Чистка от пыли</h3>
-      <h3>▫️Замена термопасты</h3>
-      <h3>▫️Переустановка Windows</h3>
-      <h3>▫️Апгрейд</h3>
-      <h3>▫️Другие работы</h3>
-      </div>
-      <div class="image-right">
-        <img src="https://images.prom.ua/1584347388_w600_h600_1584347388.jpg" alt="Pilt paremal" />
-      </div>
-    </div>
-
-
-    <div class="content-section">
-      <div class="text-left">
-        <h1>Ремонт Телефонов и Планшетов</h1>
-      <h3>▫️Замена дисплея</h3>
-      <h3>▫️Замена кнопок</h3>
-      <h3>▫️Замена разъема питания</h3>
-      <h3>▫️Замена корпуса</h3>
-      <h3>▫️Другие работы</h3>
-      </div>
-      <div class="image-right">
-        <img src="https://remhol.ee/wp-content/themes/cynic/images/repair-phone-samsung.png" alt="Pilt paremal" />
-      </div>
-    </div>
-
-    <div class="content-section">
-      <div class="text-left">
-        <h1>Средства Индивидуальной Мобильности</h1>
-      <h3>▫️Ремонт</h3>
-      <h3>▫️Обслуживание</h3>
-      <h3>▫️Замена комплектующих</h3>
-      <h3>▫️Замена Резины</h3>
-      </div>
-      <div class="image-right">
-        <img src="https://bikevelo.ru/image/trumb/1024x1024/41895.jpg" alt="Изображение справа" />
-      </div>
-    </div>
-
-    <div class="content-section">
-      <div class="text-left">
-        <h1>Бытовая Электроника</h1>
-      <h3>▫️Ремонт</h3>
-      <h3>▫️Обслуживание</h3>
-      </div>
-      <div class="image-right">
-        <img src="https://new.ksd-images.lt/display?path=aikido/cache/86b0e97344210691e2445e69b946c484.jpeg&h=270&op=fit&w=374" alt="Изображение справа" />
-      </div>
-    </div>
-
-    <div class="welcome-banner">
-      <div class="contact-text">
-        <h1>Обратная Связь</h1>
-      <p>Телефон: +372 56046879</p>
-      <p>Телефон: +372 55637090</p>
-      <p>asbest.group.entertainment@gmail.com</p>
-      <p>Raadiku 8/3</p>
-      </div>
-
-      <div class="form-container">
-        <div class="form-header">Оставьте заявку на ремонт
-          <h6>Ответ с примерной стоимостью и временем ремонта придет вам на почту!</h6>
+      <div class="badge-row reveal-stagger">
+        <div class="badge-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg>
+          Работаем по выходным
         </div>
-        <form action="https://formspree.io/f/xvgrndnl" method="POST" class="form-body">
-          <input type="tel" name="phone" placeholder="Телефон" required>
-        <input type="email" name="_replyto" placeholder="Email" required>
-        <input type="text" name="device" placeholder="Устройство (Пример: iPhone)" required>
-        <input type="text" name="issue" placeholder="Что сломалось?" class="big-input" required>
-        <button type="submit">Оставить заявку</button>
-        </form>
+        <div class="badge-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+          Низкая стоимость
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <section id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Что мы ремонтируем</h2>
+      </div>
+
+      <div class="services-grid">
+        <article class="ticket reveal">
+          <div class="ticket-top">
+            <div class="ticket-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="24" rx="3"/><line x1="18" y1="40" x2="30" y2="40"/><line x1="24" y1="32" x2="24" y2="40"/></svg>
+            </div>
+            <span class="ticket-code mono">PN-01</span>
+          </div>
+          <h3>Ремонт Персональных Компьютеров</h3>
+          <div class="ticket-divider"></div>
+          <ul class="ticket-list">
+            <li>Ремонт материнской платы</li>
+            <li>Чистка от пыли</li>
+            <li>Замена термопасты</li>
+            <li>Переустановка Windows</li>
+            <li>Замена корпуса</li>
+            <li>Апгрейд</li>
+            <li>Другие работы</li>
+          </ul>
+        </article>
+
+        <article class="ticket reveal">
+          <div class="ticket-top">
+            <div class="ticket-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="9" width="32" height="21" rx="2"/><path d="M4 36h40l-4 6H8l-4-6z"/></svg>
+            </div>
+            <span class="ticket-code mono">PN-02</span>
+          </div>
+          <h3>Ремонт Ноутбуков</h3>
+          <div class="ticket-divider"></div>
+          <ul class="ticket-list">
+            <li>Замена петель</li>
+            <li>Замена клавиатуры</li>
+            <li>Ремонт материнской платы</li>
+            <li>Чистка от пыли</li>
+            <li>Замена термопасты</li>
+            <li>Переустановка Windows</li>
+            <li>Апгрейд</li>
+            <li>Другие работы</li>
+          </ul>
+        </article>
+
+        <article class="ticket reveal">
+          <div class="ticket-top">
+            <div class="ticket-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="6" width="20" height="36" rx="3"/><line x1="22" y1="36" x2="26" y2="36"/></svg>
+            </div>
+            <span class="ticket-code mono">PN-03</span>
+          </div>
+          <h3>Ремонт Телефонов и Планшетов</h3>
+          <div class="ticket-divider"></div>
+          <ul class="ticket-list">
+            <li>Замена дисплея</li>
+            <li>Замена кнопок</li>
+            <li>Замена разъёма питания</li>
+            <li>Замена корпуса</li>
+            <li>Другие работы</li>
+          </ul>
+        </article>
+
+        <article class="ticket reveal">
+          <div class="ticket-top">
+            <div class="ticket-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="38" r="4.5"/><circle cx="36" cy="38" r="4.5"/><path d="M12 38h6l4-19h10"/><path d="M22 19h13v6"/></svg>
+            </div>
+            <span class="ticket-code mono">PN-04</span>
+          </div>
+          <h3>Средства Индивидуальной Мобильности</h3>
+          <div class="ticket-divider"></div>
+          <ul class="ticket-list">
+            <li>Ремонт</li>
+            <li>Обслуживание</li>
+            <li>Замена комплектующих</li>
+            <li>Замена резины</li>
+          </ul>
+        </article>
+
+        <article class="ticket reveal">
+          <div class="ticket-top">
+            <div class="ticket-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10h18l-6 14h-6z"/><line x1="24" y1="24" x2="24" y2="33"/><line x1="15" y1="39" x2="33" y2="39"/></svg>
+            </div>
+            <span class="ticket-code mono">PN-05</span>
+          </div>
+          <h3>Бытовая Электроника</h3>
+          <div class="ticket-divider"></div>
+          <ul class="ticket-list">
+            <li>Ремонт</li>
+            <li>Обслуживание</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <span class="eyebrow">Контакты</span>
+          <h2>Расскажите о своём устройстве</h2>
+          <p class="lead">Позвоните, напишите или заполните форму рядом — мы ответим с оценкой стоимости и сроком ремонта на вашу почту.</p>
+          <ul class="info-list">
+            <li>
+              <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg></span>
+              <a href="tel:+37256046879">+372 5604 6879</a>
+            </li>
+            <li>
+              <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg></span>
+              <a href="tel:+37255637090">+372 5563 7090</a>
+            </li>
+            <li>
+              <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
+              <a href="mailto:asbest.group.entertainment@gmail.com">asbest.group.entertainment@gmail.com</a>
+            </li>
+            <li>
+              <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span class="info-text">Raadiku 8/3, Таллинн</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <form class="form-ticket" action="https://formspree.io/f/xvgrndnl" method="POST" id="repairForm">
+            <div class="form-ticket-head">
+              <span class="mono">Ремонтный талон</span>
+              <h3>Оставьте заявку на ремонт</h3>
+              <p>Ответ с оценкой стоимости и сроком ремонта придёт на вашу почту.</p>
+            </div>
+
+            <div class="field">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+372 ..." required />
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="device">Устройство</label>
+              <input type="text" id="device" name="device" placeholder="Например: iPhone 12" required />
+            </div>
+            <div class="field">
+              <label for="issue">Что сломалось?</label>
+              <textarea id="issue" name="issue" placeholder="Опишите проблему коротко" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <span class="submit-label">Оставить заявку</span>
+              <span class="spinner"></span>
+            </button>
+
+            <div class="form-note" id="formNote"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div class="brand">🔧 Asbest Repair</div>
+    <div class="footer-links">
+      <a href="#services">Услуги</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <span>© 2026 Asbest Repair · Raadiku 8/3, Таллинн</span>
+  </div>
+</footer>
+
+<script>
+// header scroll state
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('is-scrolled', window.scrollY > 12);
+}, {passive:true});
+
+// mobile panel
+const menuToggle = document.getElementById('menuToggle');
+const mobilePanel = document.getElementById('mobilePanel');
+const mobilePanelClose = document.getElementById('mobilePanelClose');
+menuToggle.addEventListener('click', () => mobilePanel.classList.add('is-open'));
+mobilePanelClose.addEventListener('click', () => mobilePanel.classList.remove('is-open'));
+mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobilePanel.classList.remove('is-open')));
+
+// scroll reveal
+const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduceMotion) {
+  revealEls.forEach(el => el.classList.add('is-visible'));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+  revealEls.forEach(el => io.observe(el));
+}
+
+// form submit via fetch (progressive enhancement)
+const form = document.getElementById('repairForm');
+const note = document.getElementById('formNote');
+const submitBtn = form.querySelector('.submit-btn');
+
+function showNote(type, text){
+  note.textContent = text;
+  note.className = 'form-note is-visible ' + type;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.classList.add('is-loading');
+  note.classList.remove('is-visible');
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.reset();
+      showNote('success', 'Спасибо! Заявка отправлена — мы ответим на почту в ближайшее время.');
+    } else {
+      showNote('error', 'Что-то пошло не так. Попробуйте ещё раз или позвоните нам напрямую.');
+    }
+  } catch (err) {
+    showNote('error', 'Что-то пошло не так. Попробуйте ещё раз или позвоните нам напрямую.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('is-loading');
+  }
+});
+</script>
 </body>
 </html>
-
